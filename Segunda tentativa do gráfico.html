@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+    <div>
+        <canvas id="myChart" style="position: relative; height:80vh; width:80vw"></canvas>
+    </div>
+
+</body>
+<script>
+
+    const data = {
+        datasets: [{
+            label: 'Lumes',
+            data: [
+                { x: 100, y: 150, r: 0 },   // Ponta, baixo esquerda
+                { x: 400, y: 550, r: 0 },   // Ponta, cima direita
+                { x: 198, y: 222, r: 12 },
+                { x: 215, y: 222, r: 12 },
+                { x: 230, y: 222, r: 11 },
+                { x: 244, y: 222, r: 11 },
+                { x: 259, y: 222, r: 13 },
+                { x: 274, y: 222, r: 12 },
+                { x: 288, y: 222, r: 13 },
+                { x: 302, y: 222, r: 13 },
+                { x: 310, y: 290, r: 15 },
+                { x: 320, y: 391, r: 19 },
+                { x: 335, y: 419, r: 13 },
+                { x: 160, y: 320, r: 40 }
+            ],
+            backgroundColor: 'rgba(165, 10, 31, 0.973)'
+        }]
+    };
+
+    const image = new Image();
+    image.src = 'img/planta02.jpg';
+
+    const plugin = {
+        id: 'custom_canvas_background_image',
+        beforeDraw: (chart) => {
+            if (image.complete) {
+                const ctx = chart.ctx;
+                const { top, left, width, height } = chart.chartArea;
+                const x = left + width / 2 - image.width / 2;
+                const y = top + height / 2 - image.height / 2;
+                ctx.drawImage(image, x, y);
+            } else {
+                image.onload = () => chart.draw();
+            }
+        }
+    };
+
+    const config = {
+        type: 'bubble',
+        data: data,
+        plugins: [plugin],
+    };
+
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+</script>
+
+</html>

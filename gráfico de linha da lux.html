@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficos</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body style="display: flex;">
+
+    <div>
+        <canvas id="myChart" style="position: relative; height:80vh; width:80vw"></canvas>
+    </div>
+
+</body>
+
+<script>
+    const labels = [
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+    ];
+
+
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Lm35 - 103',
+            backgroundColor: 'rgb(255,255,0)',
+            borderColor: 'rgb(255,255,0)',
+            data: [2000, 1920, 1630, 1700, 1500, 1594],
+        }
+        ]
+    };
+    const data2 = {
+        labels: labels,
+        datasets: [{
+            label: 'Lm35 - 104',
+            backgroundColor: 'rgb(255,55,0)',
+            borderColor: 'rgb(255,55,0)',
+            data: [1950, 1520, 1460, 1370, 1500, 1497],
+        }
+        ]
+    };
+
+    const config = {
+        type: 'line',
+        data: data, data2,
+        options: {}
+    };
+
+</script>
+
+<script>
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+</script>
+
+</html>
